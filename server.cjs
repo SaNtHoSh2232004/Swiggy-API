@@ -55,3 +55,18 @@ app.get('/get-restaurants-details',async function(request,response){
          })
     }
 })
+
+app.delete('/delete-restaurant-detail/:id',async function(request,response){
+  try{
+    await  Restaurant.findByIdAndDelete(request.params.id)
+    response.status(201).json({
+      "status":"success"
+    })
+  }catch(error){
+    response.status(500).json({
+      "status":"failure",
+      "message":"could not fetch",
+      "error":"error"
+    })
+  }
+})
